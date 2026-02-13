@@ -20,4 +20,5 @@ How to Run:
 2. Open index.html in a browser
 
 Live Demo:
-(Host using GitHub Pages or Netlify)
+(Host using GitHub Pages)
+

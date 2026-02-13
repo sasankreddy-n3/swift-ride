@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SwiftRide</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- HERO -->
+  <header class="hero">
+    <nav class="navbar">
+      <h1 class="logo">SwiftRide</h1>
+    </nav>
+
+    <div class="hero-content">
+      <h2>Book a Ride in Seconds</h2>
+      <p>Fast • Reliable • Affordable</p>
+    </div>
+  </header>
+
+  <!-- BOOKING -->
+  <section class="booking-section">
+    <div class="booking-card">
+      <h3>Book Your Ride</h3>
+
+      <input type="text" id="pickup" placeholder="Pickup Location">
+      <input type="text" id="drop" placeholder="Drop Location">
+
+      <div class="ride-types">
+        <div class="ride active" data-type="Bike">🚲 Bike</div>
+        <div class="ride" data-type="Auto">🛺 Auto</div>
+        <div class="ride" data-type="Cab">🚗 Cab</div>
+      </div>
+
+      <button class="book-btn" id="bookRideBtn">Book Ride</button>
+    </div>
+  </section>
+
+  <!-- RIDE HISTORY -->
+  <section class="history">
+    <h3>Your Rides</h3>
+    <div id="rideList" class="ride-list"></div>
+  </section>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

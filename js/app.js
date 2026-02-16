@@ -1,76 +1,73 @@
-const rides = document.querySelectorAll(".ride");
-const bookBtn = document.getElementById("bookRideBtn");
+const pickupInput = document.getElementById("pickup");
+const dropInput = document.getElementById("drop");
+const typeSelect = document.getElementById("type");
+const bookBtn = document.getElementById("bookBtn");
 const rideList = document.getElementById("rideList");
 
-let selectedRide = "Bike";
-
-// Load rides on page load
-document.addEventListener("DOMContentLoaded", loadRides);
-
-// Ride type selection
-rides.forEach(ride => {
-  ride.addEventListener("click", () => {
-    rides.forEach(r => r.classList.remove("active"));
-    ride.classList.add("active");
-    selectedRide = ride.dataset.type;
-  });
-});
-
-// Book ride
+/* CREATE */
 bookBtn.addEventListener("click", () => {
-  const pickup = document.getElementById("pickup").value;
-  const drop = document.getElementById("drop").value;
+  const pickup = pickupInput.value.trim();
+  const drop = dropInput.value.trim();
+  const type = typeSelect.value;
 
   if (!pickup || !drop) {
     alert("Please fill all fields");
     return;
   }
 
-  const ride = {
-    id: Date.now(),
-    pickup,
-    drop,
-    type: selectedRide,
-    status: "Booked"
-  };
+  const rides = getRides();
+  rides.push({ pickup, drop, type });
+  saveRides(rides);
 
-  const ridesData = getRides();
-  ridesData.push(ride);
-  localStorage.setItem("rides", JSON.stringify(ridesData));
+  pickupInput.value = "";
+  dropInput.value = "";
 
-  document.getElementById("pickup").value = "";
-  document.getElementById("drop").value = "";
-
-  loadRides();
+  renderRides();
 });
 
-// Get rides
-function getRides() {
-  return JSON.parse(localStorage.getItem("rides")) || [];
-}
-
-// Load rides
-function loadRides() {
+/* READ */
+function renderRides() {
+  const rides = getRides();
   rideList.innerHTML = "";
-  const ridesData = getRides();
 
-  ridesData.forEach(ride => {
+  if (rides.length === 0) {
+    rideList.innerHTML = "<p>No rides booked yet</p>";
+    return;
+  }
+
+  rides.forEach((ride, index) => {
     const div = document.createElement("div");
-    div.className = "ride-card";
+    div.className = "ride";
     div.innerHTML = `
       <strong>${ride.type}</strong><br>
       ${ride.pickup} → ${ride.drop}<br>
-      Status: ${ride.status}<br>
-      <button class="delete-btn" onclick="deleteRide(${ride.id})">Cancel</button>
+      <button onclick="deleteRide(${index})">Cancel Ride</button>
     `;
     rideList.appendChild(div);
   });
 }
 
-// Delete ride
-function deleteRide(id) {
-  let ridesData = getRides();
-  ridesData = ridesData.filter(r => r.id !== id);
-  localStorage.setItem("rides", JSON.stringify(ridesData));
-  loadRides();
+/* DELETE */
+function deleteRide(index) {
+  const rides = getRides();
+  rides.splice(index, 1);
+  saveRides(rides);
+  renderRides();
 }
+
+/* STORAGE */
+function getRides() {
+  return JSON.parse(localStorage.getItem("rides")) || [];
+}
+
+function saveRides(rides) {
+  localStorage.setItem("rides", JSON.stringify(rides));
+}
+
+/* SCROLL */
+function scrollToSection(id) {
+  document.getElementById(id).scrollIntoView({ behavior: "smooth" });
+}
+
+/* INIT */
+renderRides();

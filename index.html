@@ -4,46 +4,91 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>SwiftRide</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-  <!-- HERO -->
-  <header class="hero">
-    <nav class="navbar">
-      <h1 class="logo">SwiftRide</h1>
-    </nav>
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="container nav-inner">
+    <h1 class="logo">SwiftRide</h1>
+    <ul class="nav-links">
+      <li onclick="scrollToSection('hero')">Home</li>
+      <li onclick="scrollToSection('why')">Why SwiftRide</li>
+      <li onclick="scrollToSection('booking')">Book Ride</li>
+      <li onclick="scrollToSection('history')">My Rides</li>
+    </ul>
+  </div>
+</nav>
 
-    <div class="hero-content">
-      <h2>Book a Ride in Seconds</h2>
-      <p>Fast • Reliable • Affordable</p>
-    </div>
-  </header>
 
-  <!-- BOOKING -->
-  <section class="booking-section">
-    <div class="booking-card">
-      <h3>Book Your Ride</h3>
+<!-- HERO -->
+<header class="hero" id="hero">
+  <div class="container hero-inner">
+    <h2>Book rides instantly</h2>
+    <p>Reliable, simple and real-world ready ride booking platform</p>
+    <button class="primary-btn" onclick="scrollToSection('booking')">
+      Book Ride
+    </button>
+  </div>
+</header>
 
-      <input type="text" id="pickup" placeholder="Pickup Location">
-      <input type="text" id="drop" placeholder="Drop Location">
 
-      <div class="ride-types">
-        <div class="ride active" data-type="Bike">🚲 Bike</div>
-        <div class="ride" data-type="Auto">🛺 Auto</div>
-        <div class="ride" data-type="Cab">🚗 Cab</div>
+<section class="why" id="why">
+  <div class="container">
+    <h3 class="section-title">Why SwiftRide?</h3>
+
+    <div class="why-grid">
+      <div class="why-card">
+        <h4>Fast Booking</h4>
+        <p>Book a ride in seconds with a clean and focused interface.</p>
       </div>
-
-      <button class="book-btn" id="bookRideBtn">Book Ride</button>
+      <div class="why-card">
+        <h4>Safe & Reliable</h4>
+        <p>Clear ride details designed with user trust in mind.</p>
+      </div>
+      <div class="why-card">
+        <h4>Transparent</h4>
+        <p>No hidden steps or confusing workflows.</p>
+      </div>
+      <div class="why-card">
+        <h4>Real-World Ready</h4>
+        <p>Built using modular JavaScript and persistent storage.</p>
+      </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- RIDE HISTORY -->
-  <section class="history">
-    <h3>Your Rides</h3>
-    <div id="rideList" class="ride-list"></div>
-  </section>
+<!-- BOOKING -->
+<section class="booking" id="booking">
+  <div class="container booking-container">
+    <div class="card">
+      <h3>Book a Ride</h3>
 
-  <script src="js/app.js"></script>
+      <input id="pickup" placeholder="Pickup location">
+      <input id="drop" placeholder="Drop location">
+
+      <select id="type">
+        <option value="Bike">Bike</option>
+        <option value="Auto">Auto</option>
+        <option value="Cab">Cab</option>
+      </select>
+
+      <button id="bookBtn" class="primary-btn">
+        Confirm Ride
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- HISTORY -->
+<section class="history" id="history">
+  <div class="container">
+    <h3 class="section-title">My Rides</h3>
+    <div id="rideList"></div>
+  </div>
+</section>
+
+<script src="js/app.js"></script>
 </body>
 </html>
